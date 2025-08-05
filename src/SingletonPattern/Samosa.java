@@ -1,6 +1,8 @@
 package SingletonPattern;
 
 public class Samosa {
+
+    //Lazy initialization
     private static Samosa samosa;
     private Samosa(){
 
