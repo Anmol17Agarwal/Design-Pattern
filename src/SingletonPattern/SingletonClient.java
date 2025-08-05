@@ -1,10 +1,15 @@
 package SingletonPattern;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Constructor;
 import java.util.function.Supplier;
 
 public class SingletonClient {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception,CloneNotSupportedException {
+        /*
 
         /*
         * Lazy initialization
@@ -55,13 +60,13 @@ public class SingletonClient {
          *  1. Reflection API to break singleton pattern
          * */
 
-        Cutlet cutlet = Cutlet.getCutlet();
+        Kachori cutlet = Kachori.getKachori();
         System.out.println(cutlet.hashCode());
-        Constructor<Cutlet> constructor1 = Cutlet.class.getDeclaredConstructor();
+        Constructor<Kachori> constructor1 = Kachori.class.getDeclaredConstructor();
         //setAccessible(true) because constructor is private now in Cutlet it able to access
         // without this it will throw security exception
         constructor1.setAccessible(true);
-        Cutlet cutlet1 = constructor1.newInstance();
+        Kachori cutlet1 = constructor1.newInstance();
         System.out.println(cutlet1.hashCode());
         System.out.println(cutlet == cutlet1);
 
@@ -85,15 +90,39 @@ public class SingletonClient {
         * Solution 2 - using Enum
         * */
 
-        Emarti emarti = Emarti.INSTANCE;
-        System.out.println(emarti.hashCode());
+//        Emarti emarti = Emarti.INSTANCE;
+//        System.out.println(emarti.hashCode());
+//
+//        Constructor<Emarti> constructor3 = Emarti.class.getDeclaredConstructor();
+//        //setAccessible(true) because constructor is private now in Cutlet it able to access
+//        // without this it will throw security exception
+//        constructor3.setAccessible(true);
+//        Emarti emarti1 = constructor3.newInstance();
+//        System.out.println(emarti1.hashCode());
 
-        Constructor<Emarti> constructor3 = Emarti.class.getDeclaredConstructor();
-        //setAccessible(true) because constructor is private now in Cutlet it able to access
-        // without this it will throw security exception
-        constructor3.setAccessible(true);
-        Emarti emarti1 = constructor3.newInstance();
-        System.out.println(emarti1.hashCode());
+
+        /*
+        * Deserliazation
+        * Solution: implement readResolve method
+        * */
+//        Kachori kachori = Kachori.getKachori();
+//        System.out.println(kachori.hashCode());
+//        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("singleton.ser"));
+//        oos.writeObject(kachori);
+//        System.out.println("Serialization done");
+//        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("singleton.ser"));
+//        Kachori kachori1 = (Kachori) ois.readObject();
+//        System.out.println(kachori1.hashCode());
+
+        /*
+        * Cloning
+        *
+        * */
+
+        Kachori kachori = Kachori.getKachori();
+        System.out.println(kachori.hashCode());
+        Kachori kachori1 = (Kachori)kachori.clone();
+        System.out.println(kachori1.hashCode());
 
     }
 
