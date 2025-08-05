@@ -1,9 +1,10 @@
 package SingletonPattern;
 
+import java.lang.reflect.Constructor;
 import java.util.function.Supplier;
 
 public class SingletonClient {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
 
         /*
         * Lazy initialization
@@ -47,8 +48,56 @@ public class SingletonClient {
 //        testSingletonThreadSafe(()-> Pakoda.getPakoda());
 
         //Thread Safe Lazy Singleton
-        testSingletonThreadSafe(()-> Cutlet.getCutlet());
+//        testSingletonThreadSafe(()-> Cutlet.getCutlet());
+
+        /*
+        * ways to break singleton pattern
+         *  1. Reflection API to break singleton pattern
+         * */
+
+        Cutlet cutlet = Cutlet.getCutlet();
+        System.out.println(cutlet.hashCode());
+        Constructor<Cutlet> constructor1 = Cutlet.class.getDeclaredConstructor();
+        //setAccessible(true) because constructor is private now in Cutlet it able to access
+        // without this it will throw security exception
+        constructor1.setAccessible(true);
+        Cutlet cutlet1 = constructor1.newInstance();
+        System.out.println(cutlet1.hashCode());
+        System.out.println(cutlet == cutlet1);
+
+
+
+
+        /* Solution 1- if Object is there in memory then throw exception from inside the constructor
+        * */
+
+        Jalebi jalebi = Jalebi.getCutlet();
+        System.out.println(jalebi.hashCode());
+
+//        Constructor<Jalebi> constructor2 = Jalebi.class.getDeclaredConstructor();
+//        //setAccessible(true) because constructor is private now in Cutlet it able to access
+//        // without this it will throw security exception
+//        constructor2.setAccessible(true);
+//        Jalebi jalebi1 = constructor2.newInstance();
+//        System.out.println(jalebi1.hashCode());
+
+        /*
+        * Solution 2 - using Enum
+        * */
+
+        Emarti emarti = Emarti.INSTANCE;
+        System.out.println(emarti.hashCode());
+
+        Constructor<Emarti> constructor3 = Emarti.class.getDeclaredConstructor();
+        //setAccessible(true) because constructor is private now in Cutlet it able to access
+        // without this it will throw security exception
+        constructor3.setAccessible(true);
+        Emarti emarti1 = constructor3.newInstance();
+        System.out.println(emarti1.hashCode());
+
     }
+
+
 
 
     public static void testSingletonThreadSafe(Supplier<Object> supplier) throws InterruptedException {

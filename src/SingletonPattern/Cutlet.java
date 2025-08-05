@@ -5,7 +5,6 @@ public class Cutlet {
     private static Cutlet cutlet;
 
     private Cutlet(){
-
     }
 
     public static Cutlet getCutlet(){
