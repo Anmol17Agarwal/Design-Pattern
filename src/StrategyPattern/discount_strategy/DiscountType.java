@@ -1,4 +1,4 @@
-package StrategyPattern.DiscountStrategy;
+package StrategyPattern.discount_strategy;
 
 public enum DiscountType {
     FESTIVAL,

@@ -1,4 +1,4 @@
-package StrategyPattern.DiscountStrategy;
+package StrategyPattern.discount_strategy;
 
 import java.util.HashMap;
 import java.util.Map;
