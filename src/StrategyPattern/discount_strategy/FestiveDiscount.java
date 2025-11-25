@@ -1,0 +1,8 @@
+package StrategyPattern.discount_strategy;
+
+public class FestiveDiscount implements DiscountStrategy {
+    @Override
+    public double applyDiscount(double amount) {
+        return amount * 0.80; // 20% OFF
+    }
+}
